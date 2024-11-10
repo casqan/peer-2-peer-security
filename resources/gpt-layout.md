@@ -34,6 +34,7 @@
 - **Importance of Authenticity in P2P Networks**: Explain why ensuring the authenticity of data is crucial to prevent attacks, like data tampering.
 - **Mechanisms to Ensure Authenticity**:
   - **Encryption**: Explain how encryption (e.g., DTLS for WebRTC) ensures that data comes from an authentic source.
+    - DTLS-SRTP
   - **Integrity Checks**: Discuss techniques like hashing to validate data integrity.
 - **Mitigation Strategies**: Detail countermeasures against authenticity-based attacks, such as man-in-the-middle (MITM) and replay attacks.
 
