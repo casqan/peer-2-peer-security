@@ -14,3 +14,5 @@
 - [Toward a Smart Health-Care Architecture Using WebRTC and WoT](https://link.springer.com/chapter/10.1007/978-3-319-56541-5_54)
 
 - [W3C WebRTC working Group Publications](https://www.w3.org/groups/wg/webrtc/publications/)
+
+- [Session Description Protocol (SDP) Offer/Answer Considerations for Datagram Transport Layer Security (DTLS) and Transport Layer Security (TLS)](https://datatracker.ietf.org/doc/html/rfc8842)
