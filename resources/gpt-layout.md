@@ -1,6 +1,6 @@
-# General Layout
+# General Outline
 
-## ChatGPT
+## Outline Draft
 
 ### 1. **Introduction**
 
@@ -49,3 +49,7 @@
 - Summarize key points from each section.
 - Reflect on the potential of P2P technology in browsers despite its security challenges.
 - Suggest areas for further research or improvement, especially in securing WebRTC and WebSocket connections.
+
+- Focus on WebRTC
+- More coherent
+- 
