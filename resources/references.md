@@ -19,3 +19,4 @@
 - [RFC 5766 Traversal Using Relays around NAT (TURN)](https://datatracker.ietf.org/doc/html/rfc5766)
 - [Mozilla Developer Network (MDN) - Understanding NAT Traversal with ICE, STUN, and TURN](https://developer.mozilla.org/en-US/docs/Glossary/TURN)
 - [DTLS version 1.2](https://datatracker.ietf.org/doc/html/rfc6347)
+- [](https://datatracker.ietf.org/doc/html/draft-ietf-rtcweb-security-arch-13)
