@@ -31,20 +31,20 @@
 \end{abstract}
 
 \begin{IEEEkeywords}
-peer-to-peer, WebRTC
+Peer-To-Peer, WebRTC
 \end{IEEEkeywords}
 
 \section{Introduction}
 In recent years, the proliferation of real-time applications such as video conferencing, online collaboration tools, multiplayer gaming, 
-and decentralized content-sharing platforms has brought Peer-to-Peer (P2P) communication technologies to the forefront of modern web 
+and decentralized content-sharing platforms has brought Peer-To-Peer (P2P) communication technologies to the forefront of modern web 
 infrastructure. At the heart of this evolution lies Web Real-Time Communication (WebRTC), a framework that enables seamless audio, video,
 and data exchange directly between devices without relying on centralized servers for data transmission. WebRTC's integration into browsers and 
-its adoption in applications like Google Meet, Zoom, and Discord have cemented its position as a cornerstone of real-time communication on the web.
+its adoption in applications like Google Meet, Zoom, and Discord have cemented its position as a cornerstone of real-time communication on the web. \cite{Statista_Zoom}
 The importance of P2P technologies stems from their inherent advantages over the traditional server-client model. By enabling direct communication 
-between peers, P2P systems reduce the dependency on centralized servers, thereby lowering costs, improving scalability, and reducing latency. % Citation needed
+between peers, P2P systems reduce the dependency on centralized servers, thereby lowering costs, improving scalability, and reducing latency. \cite{systematic_review_of_webrtc}
 These characteristics make P2P well-suited for scenarios requiring high performance and efficiency, such as low-latency video conferencing 
 and large-scale decentralized networks. Additionally, as edge computing and decentralized ecosystems, including blockchain technologies, continue 
-to grow, P2P communication is poised to play a critical role in shaping the future of the web.
+to grow, P2P communication is poised to play a critical role in shaping the future of the web. \cite{9297333}
 However, the adoption of P2P technologies 
 introduces unique security challenges that differ fundamentally from the established server-client architecture. In the server-client model,
 security largely revolves around protecting a central server, with mechanisms such as TLS ensuring secure communication between clients and
@@ -58,8 +58,8 @@ authentication, integrity, and authenticity in P2P systems, and examines the mec
 this paper aims to shed light on the critical role of security in advancing the adoption and reliability of P2P technologies in the modern web.
 
 \section{What WebRTC does and how it works}
-WebRTC is a web standard that facilitates a peer-to-peer connection between browsers or native clients. In order to do so, a WebRTC connection 
-is required, which involves several steps to enable secure peer-to-peer communication for audio, video, and data. 
+WebRTC is a web standard that facilitates a Peer-To-Peer connection between browsers or native clients. In order to do so, a WebRTC connection 
+is required, which involves several steps to enable secure Peer-To-Peer communication for audio, video, and data. 
 The process begins with signaling, where peers exchange Session Description Protocol (SDP) messages and ICE candidates via a 
 signaling server (e.g., WebSocket or SIP). These exchanges negotiate media codecs, encryption keys, and network details. \cite{W3C_WebRTC}
 
@@ -68,7 +68,7 @@ When direct connections are blocked by restrictive networks, TURN servers relay 
 DTLS handshake is performed to exchange cryptographic keys securely. These keys are then used by SRTP to encrypt audio and video streams, 
 ensuring confidentiality and integrity. \cite{W3C_WebRTC}
 
-Once these steps are complete, a direct peer-to-peer connection is established, with audio/video transmitted over SRTP 
+Once these steps are complete, a direct Peer-To-Peer connection is established, with audio/video transmitted over SRTP 
 and other data over SCTP. This process relies on key components like signaling servers, STUN/TURN servers, and browser-supported 
 WebRTC APIs to ensure seamless, secure communication across various network conditions. \cite{W3C_WebRTC}
 
@@ -122,7 +122,7 @@ There are two major classes of authenticated entities in the system:
     \item Calling services: Web sites whose origin we can verify (optimally via HTTPS, but in some cases because we are on a topologically restricted 
     network, such as behind a firewall, and can infer authentication from firewall behavior).
     \item Other users: WebRTC peers whose origin we can verify cryptographically (optimally via DTLS-SRTP).
-\end{itemize}
+\end{itemize} \cite{RFC8827}
 
 Note that merely being authenticated does not make these entities trusted. For instance, just because we can verify that 
 <https://www.example.org/> is owned by Dr. Evil does not mean that we can trust Dr. Evil to access our camera and microphone. 
@@ -130,13 +130,12 @@ However, it gives the user an opportunity to determine whether they wish to trus
 contact Dr. Evil (perhaps to arrange for ransom payment), it's safe to temporarily give them access to the camera and microphone 
 for the purpose of the call, but they don't want Dr. Evil to be able to access their camera and microphone other than during the 
 call. The point here is that we must first identify other elements before we can determine whether and how much to trust them.
- Additionally, sometimes we need to identify the communicating peer before we know what policies to apply.
+ Additionally, sometimes we need to identify the communicating peer before we know what policies to apply. \cite{RFC8827}
 
 \subsection{Unauthenticated Entities}
 Other than the above entities, we are not generally able to identify other network elements; thus, we cannot trust them. 
 This does not mean that it is not possible to have any interaction with them, but it means that we must assume that they will 
-behave maliciously and design a system which is secure even if they do so.
-
+behave maliciously and design a system which is secure even if they do so. \cite{RFC8827}
 
 \section{Identification in WebRTC}
 "On the internet, no one knows you are a dog", the punchline of a comic by Peter Steiner back in 1993.
@@ -220,8 +219,8 @@ the use of VPN's. Possible leaked information can include the users
     address is assigned by the network to which the client
     platform is attached, and is the approximate IPv6 counterpart of 
     the Private IPv4 address assigned by LAN [5].
-    \item \it{Private IP address assigned by the VPN server:} this pri-
-    vate (IPv4 or IPv6, depending on the VPN configuration)
+    \item \it{Private IP address assigned by the VPN server:} this private 
+    (IPv4 or IPv6, depending on the VPN configuration)
     address is assigned by the VPN server.
     \item \it{Private IPv4 address assigned by LAN:} this address is 
     assigned by the network to which the client platform is
@@ -231,7 +230,7 @@ While not all of these are worth the same, a public IPv6 Address leak for exampl
 Unique local Address leak, these are still security concerns VPNs try to solve.
 VPN providers have now setup WebRTC address leak detectors to inform the user, if a leak of their private IP address
 is present. Providers for these Services include some of the major players in the private VPN space, such as 
-ExpressVPN and SurfShark. % https://www.expressvpn.com/webrtc-leak-test 
+ExpressVPN and SurfShark. % https://www.expressvpn.com/WebRTC-leak-test 
 Some solutions to this problem include:
 
 \begin{itemize}
@@ -239,7 +238,7 @@ Some solutions to this problem include:
     \item Disabling IPv6 to reduce the amount of information leaked, if a leak occurs.
     \item Relying on Relay Server to transmit data to a central location before continuing on to the connected peer,
     which however, does need to be implemented by the Developers of the application using WebRTC, which defeats the
-    purpose of not having a central server in peer-to-peer to begin with.
+    purpose of not having a central server in Peer-To-Peer to begin with.
 \end{itemize}\cite{One_leak_will_sink_a_ship}
 However, all these are mere workarounds and WebRTC without VPNs has to inherently leak
 IP addresses as they are required to connect to another peer.
