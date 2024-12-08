@@ -16,3 +16,6 @@
 - [W3C WebRTC working Group Publications](https://www.w3.org/groups/wg/webrtc/publications/)
 
 - [Session Description Protocol (SDP) Offer/Answer Considerations for Datagram Transport Layer Security (DTLS) and Transport Layer Security (TLS)](https://datatracker.ietf.org/doc/html/rfc8842)
+- [RFC 5766 Traversal Using Relays around NAT (TURN)](https://datatracker.ietf.org/doc/html/rfc5766)
+- [Mozilla Developer Network (MDN) - Understanding NAT Traversal with ICE, STUN, and TURN](https://developer.mozilla.org/en-US/docs/Glossary/TURN)
+- [DTLS version 1.2](https://datatracker.ietf.org/doc/html/rfc6347)
