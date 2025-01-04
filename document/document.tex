@@ -7,8 +7,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{biblatex}
+\usepackage{hyperref}
+\usepackage[inkscapelatex=false]{svg}
 
-\graphicspath{ {./img/} }
+\def\bibfont{\footnotesize}
+
+\graphicspath{ {./img} }
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -21,13 +25,21 @@
 }
 
 \author{\IEEEauthorblockN{Marc André Matija}
-\IEEEauthorblockA{\textit{info@casqan.net}} \\
+\IEEEauthorblockA{\textit{info@casqan.net} \\ \textit{Hochschule Rhein-Main} \\ Wiesbaden, Germany} \\
 \textit{}
 }
 
 \maketitle
 
 \begin{abstract}
+    In the era of real-time web applications, technologies like WebRTC and Peer-to-Peer (P2P) communication have become essential components of 
+    modern web infrastructure. WebRTC enables direct, decentralized communication between devices, facilitating real-time audio, video, and data 
+    exchange without relying on centralized servers. This paper examines the growing significance of P2P technologies, their inherent advantages 
+    over the server-client model, and the unique security challenges they present. Unlike traditional architectures, P2P systems demand trust 
+    establishment between endpoints in dynamic, transient environments, necessitating robust mechanisms for encryption, authentication, and integrity. 
+    Through an exploration of WebRTC's underlying technologies—such as STUN, TURN, and DTLS-SRTP—and its security framework, this paper highlights
+     how WebRTC ensures secure communication while addressing vulnerabilities like man-in-the-middle attacks and IP address leaks. This study underscores 
+     the critical role of security in the adoption and reliability of WebRTC and P2P technologies in shaping the future of real-time communication.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -39,12 +51,12 @@ In recent years, the proliferation of real-time applications such as video confe
 and decentralized content-sharing platforms has brought Peer-To-Peer (P2P) communication technologies to the forefront of modern web 
 infrastructure. At the heart of this evolution lies Web Real-Time Communication (WebRTC), a framework that enables seamless audio, video,
 and data exchange directly between devices without relying on centralized servers for data transmission. WebRTC's integration into browsers and 
-its adoption in applications like Google Meet, Zoom, and Discord have cemented its position as a cornerstone of real-time communication on the web. \cite{Statista_Zoom}
+its adoption in applications like Google Meet, Zoom, and Discord have cemented its position as a cornerstone of real-time communication on the web  \cite{Statista_Zoom}.
 The importance of P2P technologies stems from their inherent advantages over the traditional server-client model. By enabling direct communication 
-between peers, P2P systems reduce the dependency on centralized servers, thereby lowering costs, improving scalability, and reducing latency. \cite{systematic_review_of_webrtc}
+between peers, P2P systems reduce the dependency on centralized servers, thereby lowering costs, improving scalability, and reducing latency \cite{systematic_review_of_WebRTC}. 
 These characteristics make P2P well-suited for scenarios requiring high performance and efficiency, such as low-latency video conferencing 
 and large-scale decentralized networks. Additionally, as edge computing and decentralized ecosystems, including blockchain technologies, continue 
-to grow, P2P communication is poised to play a critical role in shaping the future of the web. \cite{9297333}
+to grow, P2P communication is poised to play a critical role in shaping the future of the web \cite{9297333}. 
 However, the adoption of P2P technologies 
 introduces unique security challenges that differ fundamentally from the established server-client architecture. In the server-client model,
 security largely revolves around protecting a central server, with mechanisms such as TLS ensuring secure communication between clients and
@@ -52,28 +64,41 @@ the server. In contrast, P2P systems require trust to be established directly be
 environments. This shift necessitates the use of mechanisms like end-to-end encryption, peer authentication, and data integrity validation to
 ensure secure interactions without the intermediary role of a central authority. Additionally, P2P architectures must contend with new vectors
 of attack, such as man-in-the-middle attacks during peer discovery, unauthorized data relay via TURN servers, and exploitation of NAT traversal
-mechanisms like STUN. This paper explores the growing relevance of WebRTC and P2P technologies in modern web infrastructure, with a focus on 
-their security implications. It delves into the distinctions between P2P and server-client security models, highlights the challenges of ensuring 
-authentication, integrity, and authenticity in P2P systems, and examines the mechanisms employed by WebRTC to address these challenges. By doing so, 
-this paper aims to shed light on the critical role of security in advancing the adoption and reliability of P2P technologies in the modern web.
+mechanisms like STUN.
 
 \section{What WebRTC does and how it works}
 WebRTC is a web standard that facilitates a Peer-To-Peer connection between browsers or native clients. In order to do so, a WebRTC connection 
 is required, which involves several steps to enable secure Peer-To-Peer communication for audio, video, and data. 
 The process begins with signaling, where peers exchange Session Description Protocol (SDP) messages and ICE candidates via a 
-signaling server (e.g., WebSocket or SIP). These exchanges negotiate media codecs, encryption keys, and network details. \cite{W3C_WebRTC}
+signaling server (e.g., WebSocket or SIP). These exchanges negotiate media codecs, encryption keys, and network details \cite{W3C_WebRTC}. 
+
+In order to facilitate Peer-To-Peer connections WebRTC makes use of the following technologies:
+\begin{itemize}
+    \item \textbf{Network Address Translation (NAT):} NAT is a method used in computer networking to map multiple private IP addresses within a local network 
+    to a single public IP address. This is typically done by a router or gateway, allowing devices in private networks to communicate with 
+    external networks, such as the internet, while conserving the limited pool of IPv4 addresses. NAT plays a crucial role in modern 
+    networking due to the IPv4 address scarcity and the widespread adoption of private networks \cite{RFC2663}. 
+    \item \textbf{STUN (Session Traversal Utilities for NAT):} Allows a device to discover its public-facing IP and port as seen by the external 
+    network. This information is shared with the other peer during signaling, enabling them to attempt a direct connection \cite{RFC2663}. 
+    \item \textbf{TURN (Traversal Using Relays around NAT):} Acts as a relay server when NAT or firewall restrictions make direct connections impossible. 
+    While TURN ensures connectivity, it adds latency and bandwidth costs \cite{RFC2663}.
+    \item \textbf{ICE (Interactive Connectivity Establishment):} Manages the process of collecting potential connection candidates (public/private IPs) and testing
+     them to find the most efficient path for communication, whether direct or through a relay \cite{W3C_WebRTC}.
+    \item \textbf{DTLS (Datagram Transport Layer Security):} is a protocol designed to provide security for datagram-based applications, such as those using UDP.
+     It ensures privacy, integrity, and authentication by encrypting and authenticating the communication, similar to TLS, but adapted for unreliable transport protocols \cite{RFC5764}.
+\end{itemize}
 
 To traverse NATs and firewalls, WebRTC uses the ICE framework, leveraging STUN servers to discover public IP addresses and ports. 
 When direct connections are blocked by restrictive networks, TURN servers relay traffic to ensure connectivity. After signaling, a
 DTLS handshake is performed to exchange cryptographic keys securely. These keys are then used by SRTP to encrypt audio and video streams, 
-ensuring confidentiality and integrity. \cite{W3C_WebRTC}
+ensuring confidentiality and integrity \cite{W3C_WebRTC}.
 
 Once these steps are complete, a direct Peer-To-Peer connection is established, with audio/video transmitted over SRTP 
-and other data over SCTP. This process relies on key components like signaling servers, STUN/TURN servers, and browser-supported 
-WebRTC APIs to ensure seamless, secure communication across various network conditions. \cite{W3C_WebRTC}
+and other data over SCTP (Stream Control Transmission Protocol). This process relies on key components like signaling servers, STUN/TURN servers, and browser-supported 
+WebRTC APIs to ensure seamless, secure communication across various network conditions \cite{W3C_WebRTC}. 
 
 From a security standpoint, an important part is the Session Description Protocol (SDP) handshake. A critical component of the WebRTC signaling process, 
-enabling two peers to negotiate media parameters and establish a secure connection.\cite{RFC8827} While SDP itself is a plain-text protocol 
+enabling two peers to negotiate media parameters and establish a secure connection \cite{RFC8827}. While SDP itself is a plain-text protocol 
 and does not provide security features, it plays a pivotal role in enabling the secure setup of WebRTC sessions by facilitating the exchange 
 of cryptographic keys, network information, and supported capabilities. A robust security architecture around SDP ensures the integrity, 
 authenticity, and confidentiality of the WebRTC session.
@@ -82,74 +107,87 @@ Key Components of the SDP Handshake in WebRTC
 \begin{itemize}
     \item \it{Offer/Answer Model:} The handshake begins with one peer generating an SDP "offer" that contains information about supported media codecs, network candidates 
     (IP addresses and ports), and cryptographic keys for media encryption. The receiving peer responds with an SDP "answer" that finalizes 
-    the agreed-upon parameters. This process is governed by the RFC 3264.
+    the agreed-upon parameters \cite{RFC3264}.
     \item \it{ICE Candidates:} The SDP offer/answer exchanges Interactive Connectivity Establishment (ICE) candidates, which include potential connection 
-    endpoints. These candidates are necessary for traversing NATs and firewalls using STUN/TURN servers.
+    endpoints. These candidates are necessary for traversing NATs and firewalls using STUN/TURN servers \cite{RFC3264}.
     \item \it{DTLS Fingerprints:} A critical security component in the SDP handshake is the inclusion of DTLS fingerprints—hashes of the public keys used during
     the subsequent DTLS handshake. These fingerprints ensure that peers can verify the authenticity of the DTLS certificates exchanged 
-    later, preventing man-in-the-middle (MITM) attacks during key negotiation.
+    later, preventing man-in-the-middle (MITM) attacks during key negotiation \cite{RFC3264}.
     \item \it{Key Exchange:} SDP facilitates the secure exchange of cryptographic keys used by Secure Real-time Transport Protocol (SRTP) for encrypting 
     media streams. WebRTC uses DTLS-SRTP to derive encryption keys during the DTLS handshake, ensuring that media streams remain 
-    protected from eavesdropping and tampering.
+    protected from eavesdropping and tampering \cite{RFC3264}.
 \end{itemize}
 
-\includegraphics[width=0.45\textwidth]{WebRTC basic Structure}
+\begin{figure}[h]
+    \includesvg[width=0.45\textwidth]{signaling_architecture.svg}
+    \caption{A Simple WebRTC System \cite{RFC8827}}
+    \label{fig:signaling_architecture}
+\end{figure}
 
 Unlike most conventional real-time systems (e.g., SIP-based [RFC3261] soft phones), WebRTC 
-communications are directly controlled by some Web server, via a JavaScript (JS) API as shown in Figure 1.
+communications are directly controlled by some Web server, via a JavaScript (JS) API as shown in Figure 1 \ref{fig:signaling_architecture}.
 
-\includegraphics[width=0.45\textwidth]{multi domain calling.png}
+\begin{figure}[h]
+    \includesvg[width=0.45\textwidth]{multidomain_domain_calling.drawio.svg}
+    \caption{A Multidomain WebRTC System \cite{RFC8827}}
+    \label{fig:multi_domain_architecture}
+\end{figure}
 A more complicated system might alow for inter-domain calling, as shown in Figure 2. The protocol to be used between the domains 
 is not standardized by WebRTC, requires other form of security and may rely on other standardized Protocols such as the
-Session initiation Protocol (SIP), or Extensible Messaging and Presence Protocol (XMPP). \cite{RFC8827}
+Session initiation Protocol (SIP), or Extensible Messaging and Presence Protocol (XMPP) \cite{RFC8827} \ref{fig:multi_domain_architecture}. 
+
 
 \section{Authentication in WebRTC}
 \subsection{Trust Model}
 
-The basic assumption of the standardized architecture as in RFC[8827]\cite{RFC8827} is that network resources exist in a hierarchy of trust, rooted in the browser, 
-which serves as the user's Trusted Computing Base (TCB). Any security property which the user wishes to have enforced must be 
+The basic assumption of the standardized architecture is that network resources exist in a hierarchy of trust, rooted in the browser, 
+which serves as the user's Trusted Computing Base (TCB) \cite{RFC8827}. Any security property which the user wishes to have enforced must be 
 ultimately guaranteed by the browser (or transitively by some property the browser verifies). Conversely, if the browser is 
 compromised, then no security guarantees are possible. Note that there are cases (e.g., Internet kiosks) where the user can't 
 really trust the browser that much. In these cases, the level of security provided is limited by how much they trust the browser.
 Optimally, we would not rely on trust in any entities other than the browser. However, this is unfortunately not possible 
 if we wish to have a functional system. Other network elements fall into two categories: those which can be authenticated by 
 the browser and thus can be granted permissions to access sensitive resources, and those which cannot be authenticated and 
-thus are untrusted.
+thus are untrusted \cite{RFC8827}.
 
 \subsection{Authenticated Entities}
 There are two major classes of authenticated entities in the system:
 \begin{itemize}
     \item Calling services: Web sites whose origin we can verify (optimally via HTTPS, but in some cases because we are on a topologically restricted 
-    network, such as behind a firewall, and can infer authentication from firewall behavior).
-    \item Other users: WebRTC peers whose origin we can verify cryptographically (optimally via DTLS-SRTP).
-\end{itemize} \cite{RFC8827}
+    network, such as behind a firewall, and can infer authentication from firewall behavior) \cite{RFC8827}.
+    \item Other users: WebRTC peers whose origin we can verify cryptographically (optimally via DTLS-SRTP) \cite{RFC8827}.
+\end{itemize}
 
-Note that merely being authenticated does not make these entities trusted. For instance, just because we can verify that 
-<https://www.example.org/> is owned by Dr. Evil does not mean that we can trust Dr. Evil to access our camera and microphone. 
-However, it gives the user an opportunity to determine whether they wish to trust Dr. Evil or not; after all, if they desire to 
-contact Dr. Evil (perhaps to arrange for ransom payment), it's safe to temporarily give them access to the camera and microphone 
-for the purpose of the call, but they don't want Dr. Evil to be able to access their camera and microphone other than during the 
-call. The point here is that we must first identify other elements before we can determine whether and how much to trust them.
- Additionally, sometimes we need to identify the communicating peer before we know what policies to apply. \cite{RFC8827}
+Merely being authenticated does not imply that entities are trusted. For example, verification that \texttt{https://www.example.org/}
+is owned by Dr. Evil does not necessarily mean that Dr. Evil can be trusted with access to the camera and microphone \cite{RFC6973}. 
+Authentication only provides the user with the opportunity to decide whether they wish to trust Dr. Evil \cite{RFC8827}. In some cases, 
+users may choose to grant temporary access to their camera and microphone, such as for a call with Dr. Evil to discuss a ransom payment. 
+However, this trust should be limited to the duration of the call, with the user ensuring that access is not granted outside of this context 
+\cite{RFC8827}. The key point is that identification of other network elements is a prerequisite for determining the level of trust, 
+as the policies applied depend on this identification \cite{RFC8827}.
 
-\subsection{Unauthenticated Entities}
-Other than the above entities, we are not generally able to identify other network elements; thus, we cannot trust them. 
-This does not mean that it is not possible to have any interaction with them, but it means that we must assume that they will 
-behave maliciously and design a system which is secure even if they do so. \cite{RFC8827}
+ \subsection{Unauthenticated Entities} Apart from the entities previously mentioned, it is generally not possible to 
+ identify other network elements, which means they cannot be trusted. While interaction with these entities is not inherently 
+ impossible, it must be assumed that they could behave maliciously. Consequently, it is essential to design systems that remain 
+ secure even in the presence of such entities \cite{RFC8827}.
 
 \section{Identification in WebRTC}
 "On the internet, no one knows you are a dog", the punchline of a comic by Peter Steiner back in 1993.
 More than 20 years later, assurance of user identity remains a challenge, and user impersonations are
-more frequent. \cite{User_Identity_for_WebRTC_Services_A_Matter_of_Trust} However, identification in 
+more frequent \cite{User_Identity_for_WebRTC_Services_A_Matter_of_Trust}. However, identification in 
 Peer-To-Peer systems becomes a big problem, as a peer has to trust, that a connecting peer is who he 
 pretends to be. In the standard HTTPs environment the ssl
 protocol is used to facilitate a trusted connection from client to server, in which the Server
 has been previously verified by a Certificate Authority, which is trusted by the client. 
 In a general sense, this means that two peers require a third trusted party to facilitate
-identification in a secure manner.\cite{RFC8827} This part could be a peer, or superpeer that has been previously verified
-by the opposing party and himself\cite{Security_Mechanisms_for_Signaling}.
+identification in a secure manner \cite{RFC8827}. This part could be a peer, or superpeer that has been previously verified
+by the opposing party and himself \cite{Security_Mechanisms_for_Signaling} \ref{fig:call_with_idp}.
 
-\includegraphics[width=0.45\textwidth]{call with IdP Based Identity.png} % remake as SVG
+\begin{figure}[h]
+    \includesvg[width=0.45\textwidth]{idp_based_identity.drawio.svg}
+    \caption[A Call with IdP-Based Identity]{A Call with IdP-Based Identity \cite{RFC8827}}
+    \label{fig:call_with_idp}
+\end{figure}
 
 \subsection{IdP}
 As a standardized way, WebRTC offers and answers (and hence the channels established by
@@ -158,96 +196,205 @@ Provider (IdP). The idea is that the entity sending an offer or answer acts as t
 Authenticating Party (AP) and obtains an identity assertion from the IdP which it
 attaches to the session description. The consumer of the session description (i.e.,
 the RTCPeerConnection on which setRemoteDescription is called) acts as the
-Relying Party (RP) and verifies the assertion.\cite{WebRTC_Identity}
+Relying Party (RP) and verifies the assertion \cite{WebRTC_Identity}. 
 
 In order to verify assertions, the IdP domain name and protocol are taken from the
-domain and protocol fields of the identity assertion.
+domain and protocol fields of the identity assertion \cite{RFC8827}.
 
 Communication with the IdP is established by the user agent loading the IdP JavaScript from
 the IdP. The URI for the IdP script is a well-known URI formed from the “domain”
-and “protocol” fields, as specified in \cite{RFC8827}.
-The IdP MAY generate an HTTP redirect to another "https" origin, the browser
-MUST treat a redirect to any other scheme as a fatal error.
+and “protocol” fields, as specified in \cite{RFC8827}. 
+The IdP may generate an HTTP redirect to another "https" origin, the browser
+must treat a redirect to any other scheme as a fatal error.
 The user agent instantiates an isolated interpreted context, a JavaScript realm that
-operates in the origin of the loaded JavaScript. Note that a redirect will change the
-origin of the loaded script. The realm is populated with a global that implements both the
-RTCIdentityProviderGlobalScope and WorkerGlobalScope [WEBWORKERS] interfaces.
-The user agent provides an instance of RTCIdentityProviderRegistrar named
-rtcIdentityProvider in the global scope of the realm. This object is used by the IdP to
-interact with the user agent.
+operates in the origin of the loaded JavaScript \cite{RFC8827}. Note that a redirect will change the
+origin of the loaded script The user agent provides an instance of 
+RTCIdentityProviderRegistrar named rtcIdentityProvider in the global scope of the realm. 
+This object is used by the IdP to interact with the user agent \cite{RFC8827}. 
 
 \section{Authenticity and Data Integrity}
 WebRTC at it's core uses User Datagram Protocol a lightweight, connectionless communication protocol 
-within the Internet Protocol (IP) suite, defined in [RFC 768]. It enables applications to send and receive 
+within the Internet Protocol (IP) suite \cite{RFC768}. It enables applications to send and receive 
 discrete packets of data, known as datagrams, without requiring a prior connection. While UDP, does
 include a checksum to verify it's data integrity, it does not include any standard specification for ensuring
 packages have been received by the opposing party, relying on protocol extensions to facilitate save
-data transmission. \cite{RFC768}
+data transmission \cite{RFC768}. 
 WebRTC enforces end-to-end encryption for all media and data streams by default, using 
-standards like DTLS for signaling and data channels while relying on SRTP for media transmission. \cite{RFC8826}
+standards like DTLS for signaling and data channels while relying on SRTP for media transmission \cite{RFC8826}. 
 
 \subsection{DTLS}
 The DTLS protocol is a cryptographic protocol designed to provide secure communication over unreliable datagram-based 
 transport layers such as UDP. It is defined in RFC 6347 and serves as an adaptation of the widely used Transport 
 Layer Security (TLS) protocol, which secures communication over connection-oriented transport protocols like TCP. 
 By incorporating mechanisms to handle packet loss, reordering, and duplication, DTLS ensures secure, reliable 
-communication in real-time and low-latency scenarios.\cite{RFC6347}
-
-*insert technical description of DTLS*
+communication in real-time and low-latency scenarios \cite{RFC6347}.
+DTLS provides a lightweight security layer that can be seamlessly integrated into datagram-based communication protocols. Its key features include:
+\begin{itemize}
+    \item \textbf{Encryption for Confidentiality}: DTLS ensures the confidentiality of transmitted data by encrypting it using algorithms like AES or 
+    ChaCha20. Encryption ensures that even if an attacker intercepts the data, they cannot read its contents without the correct decryption key \cite{RFC6347}.
+    \item \textbf{Message Authentication for Integrity}: DTLS uses message authentication codes (MACs), such as HMAC (Hash-based Message Authentication Code), 
+    to guarantee the integrity of each transmitted packet. This helps detect any tampering or unauthorized changes to the data during transmission \cite{RFC6347}.
+    \item \textbf{Authentication}: DTLS provides mechanisms to authenticate both the client and the server, ensuring that both parties are who they claim 
+    to be. This is typically achieved through certificate-based mutual authentication using Public Key Infrastructure (PKI) \cite{RFC6347}.
+    \item \textbf{Replay Protection}: To prevent attackers from replaying previously captured messages to disrupt communication or cause unauthorized actions, 
+    DTLS incorporates sequence numbers in its packets and requires message timestamps to detect and reject replayed packets \cite{RFC6347}.
+    \item \textbf{Session Resumption}: DTLS supports session resumption, allowing parties to re-establish a secure connection without having to go 
+    through the full handshake process again. This reduces latency and computational overhead for subsequent sessions \cite{RFC6347}.
+    \item \textbf{Denial of Service (DoS) Resistance}: DTLS includes mechanisms to mitigate the risk of Denial of Service attacks, such as through 
+    stateless protocols during the handshake, making it less vulnerable to attacks that involve overwhelming the server with connection requests \cite{RFC6347}.
+    \item \textbf{Connectionless Security}: Unlike TLS, which is designed for connection-oriented protocols like TCP, DTLS operates over connectionless 
+    transport protocols such as UDP. This allows for low-latency communication, which is essential for real-time applications \cite{RFC6347}.
+\end{itemize}
 
 \subsection{SRTP}
 The Secure Real-time Transport Protocol (SRTP) is a security extension of the Real-time Transport Protocol (RTP), 
 designed to provide encryption, message authentication, and integrity for real-time multimedia communication. 
 Introduced in 2004 and defined in RFC 3711, SRTP ensures the confidentiality and integrity of voice, video, and 
-other real-time data transmitted over potentially insecure networks, such as the internet. \cite{RFC3711}
+other real-time data transmitted over potentially insecure networks, such as the internet \cite{RFC3711}. 
 
-*insert description of SRTP*
+SRTP operates as a lightweight, scalable security mechanism that is tightly integrated with RTP. It adds minimal overhead, 
+making it particularly suitable for bandwidth-constrained and latency-sensitive applications like Voice over IP (VoIP), video 
+conferencing, and streaming. The key functionalities of SRTP are as follows:
+\begin{itemize}
+    \item \textbf{Encryption for Confidentiality:} SRTP encrypts the payload of RTP packets to ensure that the media content remains 
+    confidential during transmission. By default, it uses the Advanced Encryption Standard (AES) in Counter Mode (AES-CM) for encryption. 
+    The encryption key and an initialization vector (IV) are derived from a master key provided during the session setup \cite{RFC3711}.
+    \item \textbf{Message Authentication for Integrity:} To protect against tampering, SRTP employs message authentication codes (MACs) 
+    generated using HMAC-SHA1. This allows the receiving party to verify the integrity of each packet and detect modifications or forgeries \cite{RFC3711}.
+    \item \textbf{Replay Protection:} SRTP includes a sequence number in its packets to prevent replay attacks. Packets received with 
+    duplicate sequence numbers are discarded, ensuring that attackers cannot retransmit old packets to disrupt communication \cite{RFC3711}.
+    \item \textbf{Key Management and Derivation:} SRTP does not define its own key exchange mechanism but relies on external protocols 
+    like Datagram Transport Layer Security (DTLS) or Session Description Protocol Security Descriptions (SDES) to establish and share master keys. 
+    These keys are then used to derive session keys for encryption and authentication \cite{RFC3711}.
+    \item \textbf{Flexibility and Scalability:} SRTP supports multicast and unicast transmissions, making it highly adaptable to different 
+    communication scenarios. It also allows for the selective application of security features, such as enabling encryption only for specific streams \cite{RFC3711}.
+\end{itemize}
+
+While SRTP is robust, its reliance on external protocols for key management introduces potential vulnerabilities. For example, 
+insecure signaling can lead to compromised key exchange. Additionally, misconfigured SRTP implementations may fail to enforce 
+essential security features, such as replay protection or encryption \cite{RFC3711}.
+
+Together, DTLS and SRTP form the backbone of WebRTC's security, enabling safe, real-time communication over potentially insecure networks.
 
 \section{Risks and Concerns}
 \subsection{WebRTC Leaks}
-Even tho standardized and widely adopted, WebRTC's security is not bulletproof. 
-Highlighted in the paper One leak will sink the ship, due to it's inherent nature 
-of establishing a Peer-To-Peer connection, WebRTC requires
-knowledge about a peers ip address, this could cause the potential leak of someone's location, even with
-the use of VPN's. Possible leaked information can include the users 
+Although WebRTC is standardized and widely adopted, its security is not without vulnerabilities, as WebRTC's inherent requirement for 
+establishing a Peer-to-Peer connection necessitates knowledge of a peer's IP address. This can potentially lead to 
+the leakage of a user's location, even when using VPNs \cite{One_leak_will_sink_a_ship}.
+The information at risk of being exposed includes the user's
 \begin{itemize}
     \item \it{Public IPv6 address} this is the IPv6 address of the
-    platform and is typically assigned by the ISP of the client.
+    platform and is typically assigned by the ISP of the client \cite{One_leak_will_sink_a_ship}.
     \item \it{Public Temporary IPv6 address:} this address is assigned
-    by the network to which the client platform is attached.
+    by the network to which the client platform is attached \cite{One_leak_will_sink_a_ship}.
     \item \it{Unique local address (ULA) assigned by LAN:} this IPv6
     address is assigned by the network to which the client
     platform is attached, and is the approximate IPv6 counterpart of 
-    the Private IPv4 address assigned by LAN [5].
+    the Private IPv4 address assigned by LAN \cite{One_leak_will_sink_a_ship}.
     \item \it{Private IP address assigned by the VPN server:} this private 
     (IPv4 or IPv6, depending on the VPN configuration)
-    address is assigned by the VPN server.
+    address is assigned by the VPN server \cite{One_leak_will_sink_a_ship}.
     \item \it{Private IPv4 address assigned by LAN:} this address is 
     assigned by the network to which the client platform is
-    attached.
-  \end{itemize}\cite{One_leak_will_sink_a_ship}
-While not all of these are worth the same, a public IPv6 Address leak for example, is more dangerous than a
-Unique local Address leak, these are still security concerns VPNs try to solve.
-VPN providers have now setup WebRTC address leak detectors to inform the user, if a leak of their private IP address
-is present. Providers for these Services include some of the major players in the private VPN space, such as 
-ExpressVPN and SurfShark. % https://www.expressvpn.com/WebRTC-leak-test 
-Some solutions to this problem include:
-
+    attached \cite{One_leak_will_sink_a_ship}.
+\end{itemize} 
+While not all leaks carry the same level of risk, for instance, a public IPv6 address leak is more dangerous than a unique local address 
+leak, they remain significant security concerns that VPNs aim to mitigate. To address this, VPN providers have implemented WebRTC address 
+leak detectors, which alert users if their private IP address is exposed \cite{One_leak_will_sink_a_ship}. Notable VPN providers offering this service include major players 
+like ExpressVPN and Surfshark. Potential solutions to this issue include:
 \begin{itemize}
-    \item Disabling WebRTC entirely inside the Browser or connecting client.
-    \item Disabling IPv6 to reduce the amount of information leaked, if a leak occurs.
+    \item Disabling WebRTC entirely inside the Browser or connecting client \cite{One_leak_will_sink_a_ship}.
+    \item Disabling IPv6 to reduce the amount of information leaked, if a leak occurs \cite{One_leak_will_sink_a_ship}.
     \item Relying on Relay Server to transmit data to a central location before continuing on to the connected peer,
     which however, does need to be implemented by the Developers of the application using WebRTC, which defeats the
-    purpose of not having a central server in Peer-To-Peer to begin with.
-\end{itemize}\cite{One_leak_will_sink_a_ship}
+    purpose of not having a central server in Peer-To-Peer to begin with \cite{One_leak_will_sink_a_ship}.
+\end{itemize}
 However, all these are mere workarounds and WebRTC without VPNs has to inherently leak
-IP addresses as they are required to connect to another peer.
+IP addresses as they are required to connect to another peer \cite{One_leak_will_sink_a_ship}. 
 
 \subsection{Man-In-The-Middle during signaling}
 WebRTC's peer by default require End-To-End Encryption \cite{RFC8827}, however during the signaling process,
-it is susceptible to Man in the middle attacks \cite{Security_Mechanisms_for_Signaling}
+it is susceptible to Man in the middle attacks \cite{Security_Mechanisms_for_Signaling}. 
+
+In an MITM attack, an attacker intercepts and potentially manipulates the signaling messages exchanged between peers. This can lead to several security issues:
+\begin{itemize}
+    \item \textbf{Key Substitution and Impersonation:} During signaling, peers exchange cryptographic fingerprints (e.g., DTLS-SRTP fingerprints) 
+    to verify each other's identity during the connection setup. An attacker could intercept and replace these fingerprints with their 
+    own, tricking each peer into establishing a connection with the attacker instead of the intended peer. This enables the attacker
+    to decrypt or manipulate the media streams \cite{security_of_WebRTC}.
+    \item \textbf{Session Hijacking:} An attacker could modify SDP parameters during the signaling exchange, such as altering ICE candidates to redirect traffic 
+    through malicious servers or inserting their own IP and port as a candidate. This would allow the attacker to take over the communication session \cite{security_of_WebRTC}.
+    \item \textbf{Eavesdropping:} If signaling is not encrypted, an attacker can passively intercept SDP messages, which include media codecs, ICE candidates, 
+    and DTLS fingerprints. Although the actual WebRTC streams are encrypted, metadata leakage during signaling could provide attackers with 
+    useful information for further attacks \cite{security_of_WebRTC}.
+\end{itemize}
+In the eventuality that a malicious party succeeds in setting up a Man-In-The-Middle attack, there is typically 
+not an easy solution to discover or fight against it. This is because the attack has no warning, and 
+communication is allowed to proceed as normal. If one is not expecting such an attack, the attack will likely 
+continue unnoticed \cite{WebRTC_Security}.
+
+However, by monitoring the media path regularly for no suspicious relays, we can take one small step 
+towards mitigating against Man-In-The-Middle attacks. This should be coupled with encrypted signalling, as mentioned above \cite{WebRTC_Security}.
+
+\subsection{Exploitation of vulnerable TURN Servers}
+While TURN servers are essential for ensuring connectivity, they can become a liability if misconfigured or improperly secured. Vulnerable TURN servers 
+have been exploited for bandwidth abuse, data interception, and unauthorized use, which can lead to significant security and operational risks \cite{security_of_WebRTC}.
+
+The following examples illustrate real-world cases where misconfigured or improperly secured TURN servers were exploited, 
+leading to significant security and operational risks.
+\begin{itemize}
+    \item \textbf{Bandwidth Drain Attacks on Misconfigured TURN Servers:}  
+    In 2020, researchers highlighted cases where TURN servers operated without requiring authentication credentials. Attackers discovered 
+    these servers via automated scans and used them as relays for high-volume traffic, including video streaming and file transfers. This resulted 
+    in significant financial losses for the server operators due to excessive bandwidth usage. In some cases, smaller companies faced operational 
+    outages due to unexpected bandwidth exhaustion \cite{abusing_misconfigured_turn_servers}.
+    \item \textbf{Abuse in Botnets:}  
+    Vulnerable TURN servers have been exploited in botnet operations to facilitate communication between infected devices. Attackers used 
+    TURN to bypass firewalls and NAT restrictions, creating resilient command-and-control (C\&C) infrastructures. These servers also provided
+     anonymity, making it difficult to trace botnet operations back to their origin \cite{Security_Mechanisms_for_Signaling}.
+
+    \item \textbf{Intercepting Sensitive Media Streams:}  
+    In cases where TURN servers did not enforce proper encryption, attackers exploited vulnerabilities to intercept and eavesdrop on real-time 
+    communications. Such attacks were particularly effective when TURN servers were hosted on public clouds with shared infrastructure, increasing
+    the attack surface \cite{WebRTC_Security}.
+
+    \item \textbf{Abusing Slack's TURN servers to gain access to internal services:} 
+    Slack's TURN servers were found to be misconfigured, allowing researchers to exploit them to gain unauthorized access to internal services. 
+    These servers, essential for WebRTC communication, lacked sufficient access restrictions, enabling their use as relays to connect to internal systems 
+    that should have been isolated from external networks\cite{abusing_misconfigured_turn_servers}.
+
+    The researchers demonstrated that the authentication mechanism for the TURN servers was weak, as the credentials were static and easily 
+    obtainable through client configurations. By using these credentials, they could authenticate and redirect relayed traffic to internal endpoints, 
+    effectively bypassing network restrictions. This misconfiguration allowed access to sensitive internal applications and services, exposing Slack's 
+    infrastructure to potential exploitation. Furthermore, the TURN servers were not properly isolated from the internal network, increasing the risk of 
+    unauthorized access to critical resources \cite{abusing_misconfigured_turn_servers}.
+\end{itemize}
+
+To mitigate the risks associated with misconfigured TURN servers and prevent potential exploitation, several best practices and security measures can be implemented.
+\begin{itemize}
+    \item \textbf{Enforce Authentication}: Always require user authentication (e.g., long-term credentials or OAuth tokens) to access the server, 
+    and implement short expiration times for tokens to minimize misuse \cite{security_of_WebRTC}.
+    \item \textbf{Restrict Access}: Limit access to the TURN server by configuring firewalls to allow traffic only from known IP ranges and implementing
+     rate-limiting to prevent abuse \cite{security_of_WebRTC}.
+    \item \textbf{Encrypt Traffic}: Ensure that all TURN traffic is encrypted using protocols such as DTLS or TLS, and avoid using plaintext TURN 
+    configurations \cite{security_of_WebRTC}.
+    \item \textbf{Monitor Server Usage}: Regularly audit server logs to detect unusual patterns or unauthorized access attempts, and set alerts for 
+    excessive bandwidth usage \cite{security_of_WebRTC}.
+    \item \textbf{Secure Deployment}: Deploy TURN servers in trusted environments and avoid shared or insecure cloud hosting setups \cite{security_of_WebRTC}.
+\end{itemize}
 
 \section{Conclusion}
+
+WebRTC and Peer-to-Peer communication have redefined real-time interactions in the modern web, offering unparalleled performance 
+benefits by reducing reliance on centralized servers. However, the adoption of these technologies comes with significant security 
+challenges, particularly in dynamic and distributed environments. This paper has explored the key mechanisms enabling WebRTC's 
+functionality and the security risks posed by its architecture, including signaling vulnerabilities, IP leaks, and trust establishment.
+
+While technologies such as DTLS-SRTP and Identity Providers (IdPs) provide robust solutions for encryption and authentication, 
+there remain challenges, such as mitigating man-in-the-middle attacks during signaling and addressing the trade-offs introduced 
+by TURN servers. Moving forward, securing WebRTC communications will require continued advancements in protocol design and increased 
+awareness of the specific risks associated with P2P architectures. By addressing these challenges, WebRTC and similar technologies can 
+fulfill their potential as the backbone of decentralized, real-time communication for the modern web.
 
 \printbibliography{}
 
