@@ -21,6 +21,7 @@ Hochschule RheinMain
 # Introduction
 
 - Surge in applications like video conferencing, online collaboration, multiplayer gaming, and content sharing.
+
 - Growing reliance on P2P technologies like WebRTC for direct, real-time data exchange.
 
 ![bg right:30%](./assets/Intro_Background.svg)
@@ -35,7 +36,9 @@ Hochschule RheinMain
 ![alt https://commons.wikimedia.org/wiki/File:WebRTC_Logo.svg](./assets/WebRTC.svg) ?
 
 - A web standard enabling audio, video, and data transmission directly between browsers or clients without central servers.
+
 - Enables Cross-Platform Peer-To-Peer connection
+
 - Adopted in platforms like Big Blue Button, Zoom, and Discord.
 
 <!--_footer: source: <span class="subtext">https://commons.wikimedia.org/wiki/File:WebRTC_Logo.svg</span>-->
@@ -45,8 +48,11 @@ Hochschule RheinMain
 # Why use Peer-To-Peer?
 
 - **Decentralization**: No need for a central server, reducing single points of failure and increasing reliability.
+
 - **Reduced Latency**: Direct connections between peers minimize delays compared to routing through a server.
+
 - **Scalability**: As the number of users grows, each new peer contributes to the network’s resources, enabling better scalability.
+
 - **Cost Efficiency**: Reduces infrastructure costs by distributing the load across users, rather than relying on expensive server farms.
 
 ---
@@ -54,42 +60,57 @@ Hochschule RheinMain
 # Objectives  
 
 **Presentation Goals**  
+
 - Understand WebRTC’s architecture and security challenges.
+
 - Understand how these challenges are solved.
+
 - Highlight the risks involved with peer-to-peer.  
+
 - Explore security mechanisms and mitigation strategies.  
 
 ---
 
 ## Core Components  
-- **SDP (Session Description Protocol)**: Describes session information.
-- **STUN (Session Traversal Utilities for NAT)**: Discovers public IP and port.  
-- **TURN (Traversal Using Relays around NAT)**: Relays traffic when direct connections fail.  
-- **ICE (Interactive Connectivity Establishment)**: Selects the best connection path.  
-- **DTLS (Datagram Transport Layer Security)**: Encrypts data streams.  
-- **SRTP (Secure Real-time Transport Protocol)**: Secures media streams.
+- **NAT (Network Address Translation):** Method of mapping an IP address space into another by modifying network address information in the IP header of packets.
+
+- **SDP (Session Description Protocol):** Describes session information.
+
+- **STUN (Session Traversal Utilities for NAT):** Discovers public IP and port.  
+
+- **TURN (Traversal Using Relays around NAT):** Relays traffic when direct connections fail.  
+
+- **ICE (Interactive Connectivity Establishment):** Selects the best connection path.  
+
+- **DTLS (Datagram Transport Layer Security):** Encrypts data streams.  
+
+- **SRTP (Secure Real-time Transport Protocol):** Secures media streams.
 
 ---
 
 ## How WebRTC Works  
 
-1. **Signaling**  
-   - Exchanges SDP messages and ICE candidates.  
-2. **NAT Traversal**  
-   - Uses STUN and TURN for connectivity.  
-3. **Connection Establishment**  
-   - DTLS handshake for encryption.  
-   - SRTP/SCTP for secure media and data transmission.
+- Signaling
+  - Exchanges SDP messages and ICE candidates.  
+
+- NAT Traversal  
+  - Uses STUN and TURN for connectivity.  
+
+- Connection Establishment  
+  - UDP as underlying communications Protocol
+  - DTLS handshake for encryption.  
+  - SRTP/SCTP for secure media and data transmission.
 
 
 ---
 
 ![bg right:57%](./assets/webrtc_connection.webp)
 
-- **Find public IP and port using STUN**.
-- **Exchange SDP (offer/answer)** 
-- **Exchange ICE candidates.**
-- **Connect to Peer**
+- Find public IP and port using STUN.
+- Exchange SDP (offer/answer)
+- Exchange ICE candidates.
+
+- Connect to Peer
   - Use TURN if direct connection fails
 
 
@@ -99,7 +120,9 @@ Hochschule RheinMain
 
 # How to know, who to trust?
 - Lack of central authority
+
 - Anonymous nature of WebRTC
+
 - Impersonation risks
 ![bg right:52%](./assets/dog-on-the-internet-by-peter-steiner-2826785672.jpg)
 
@@ -112,6 +135,7 @@ Hochschule RheinMain
 - **Decentralized Trust Model:**  
   - WebRTC lacks a central authority to verify peers.  
   - Relies on the signaling server and cryptographic protocols.  
+
 - **Goal:**  
   - Ensure the integrity, authenticity, and confidentiality of communication.
 
@@ -123,6 +147,7 @@ Hochschule RheinMain
 - **Identity Providers (IdPs):**  
   - Provide credentials to verify the identity of peers.  
   - Use tokens to establish mutual trust.  
+
 - **Signaling Server Trust:**  
   - Facilitates SDP and ICE exchange.  
   - Does not participate in media transmission.  
@@ -147,8 +172,11 @@ Hochschule RheinMain
 
 ## Authentication ≠ Trust
 - **Verifying identity** (e.g., Dr. Evil owns `example.org`) does not imply trustworthiness.  
+
 - **User Decision:** Users must decide whether to grant access based on the authenticated entity.  
+
 - **Temporary Trust:** Access to sensitive resources (e.g., camera/mic) should be *limited to context-specific use* (e.g., a single call).  
+
 - **Identification as Prerequisite for Trust:** Policies depend on proper identification of network elements.  Identification enables informed trust decisions and policy application.
 
 ---
@@ -156,10 +184,15 @@ Hochschule RheinMain
 ## Identification
 
 **Challenges in Identification**
+
 - **Dynamic Networks**: NATs and changing IPs hinder peer identification.
+
 - **No Central Authority**: Decentralized model lacks built-in verification.
+
 - **Impersonation Risks**: Malicious entities can mimic legitimate peers.
+
 - **Context Matters**: Trust varies across use cases (e.g., public vs. private).
+
 - **Security vs. Usability**: Balancing ease of use with strong identity checks.
 
 ---
@@ -168,9 +201,13 @@ Hochschule RheinMain
 ## Role of Identity Providers (IdPs)
 
 - Identity Verification: Cryptographic credentials ensure authenticity.
+
 - Token-based Trust: Tokens exchanged for secure signaling.
+
 - User Convenience: Trusted logins simplify identity management.
+
 - Supports Decentralization: Maintains WebRTC’s P2P architecture.
+
 - Enables Trust Decisions: Verified identities guide user trust.
 
 ![bg right:45% 100%](./assets/idp_based_identity.svg)
@@ -181,18 +218,25 @@ Hochschule RheinMain
 
 # Authenticity and Data Integrity
 
-- **End-to-End encryption by default**.
+- WebRTC uses UDP as it's default protocol with TCP as a fallback
+  - UDP being a connectionless Protocol brings it's own challenges
+- End-to-End encryption by default.
 
-Protocols used for data security:
+- Protocols used for data security:
   - **DTLS**
   - **SRTP**
 
 ---
 
-## DTLS (Datagram Transport Layer Security)
-- **Encryption for Confidentiality**: Uses AES or ChaCha20 for secure data transmission.
-- **Message Authentication**: Ensures integrity with HMAC (Hash-based Message Authentication Code).
-- **Replay Protection**: Detects and rejects replayed packets using sequence numbers and timestamps.
+## DTLS
+
+- **Encryption:** Ensures that data transmitted between peers is encrypted to prevent unauthorized access. Uses symmetric encryption (e.g., AES, ChaCha20) for fast and secure communication.
+
+- **Authentication:** Verifies the identity of both parties during the handshake process. Uses digital certificates or pre-shared keys (PSKs).
+
+- **Integrity:** Protects against data tampering by using cryptographic hash functions (e.g., HMAC).
+
+- **Replay Protection:** Prevents attackers from re-sending captured packets by assigning sequence numbers and timeouts.
 
 ---
 
@@ -200,6 +244,8 @@ Protocols used for data security:
 - **Encryption for Confidentiality**: Encrypts media content using AES in Counter Mode.
 - **Message Authentication**: Uses HMAC-SHA1 to verify integrity and prevent tampering.
 - **Replay Protection**: Includes sequence numbers to prevent replay attacks.
+
+- Relies on DTLS for exchanging cryptographic keys during the WebRTC handshake
 
 ---
 
@@ -217,8 +263,11 @@ Protocols used for data security:
 ## Mitigating Risks of WebRTC Leaks
 
 - **Disabling WebRTC**: Turning off WebRTC in the browser to prevent leaks.
+
 - **Disabling IPv6**: Reducing the scope of leaked information by disabling IPv6.
+
 - **Using Relay Servers**: Sending data through a central server, though it negates the peer-to-peer nature of WebRTC.
+
 - **No Perfect Solution**: Despite mitigations, WebRTC still inherently leaks IP addresses, sometimes even with VPN protection.
 
 ---
@@ -226,7 +275,9 @@ Protocols used for data security:
 ## Man-In-The-Middle Attacks in WebRTC
 
 - **Vulnerable Signaling Process**: WebRTC requires signaling to establish connections, which can be intercepted by attackers.
+
 - **Key Substitution & Impersonation**: Attackers can replace cryptographic fingerprints, tricking peers into connecting with the attacker instead of the intended peer.
+
 - **Session Hijacking**: Attackers can modify SDP parameters to redirect traffic through malicious servers or hijack communication sessions.
 
 ---
@@ -234,7 +285,9 @@ Protocols used for data security:
 # Mitigating MITM Attacks
 
 - **Eavesdropping on Signaling**: Without encryption, attackers can intercept metadata like SDP messages, ICE candidates, and DTLS fingerprints.
+
 - **Encrypted Signaling**: Protect signaling channels with encryption to prevent interception and manipulation.
+
 - **Monitoring Media Path**: Regular checks for suspicious relays to detect MITM activity and secure the communication.
 
 ---
@@ -242,8 +295,11 @@ Protocols used for data security:
 # Exploitation of Vulnerable TURN Servers
 
 - **Bandwidth Drain Attacks**: Misconfigured TURN servers without authentication were used to relay high-volume traffic, leading to financial losses.
+
 - **Abuse in Botnets**: Vulnerable servers were exploited to create resilient command-and-control (C&C) infrastructures, bypassing firewalls and NAT restrictions.
+
 - **Sensitive Media Interception**: Lack of encryption on TURN servers allowed attackers to eavesdrop on real-time communications, especially on public cloud infrastructure.
+
 - **Case Example – Slack’s Misconfigured TURN Servers**: Attackers exploited weak authentication to gain unauthorized access to internal services, bypassing network restrictions.
 
 ---
@@ -251,9 +307,13 @@ Protocols used for data security:
 # Mitigating Risks of Vulnerable TURN Servers
 
 - **Enforce Authentication**: Use strong authentication mechanisms, such as long-term credentials or OAuth tokens, with short expiration times.
+
 - **Restrict Access**: Limit access to TURN servers by configuring firewalls and using rate-limiting to prevent abuse.
+
 - **Encrypt Traffic**: Ensure TURN traffic is encrypted with protocols like DTLS or TLS.
+
 - **Monitor Server Usage**: Regularly audit server logs for unusual patterns or unauthorized access attempts.
+
 - **Secure Deployment**: Avoid hosting TURN servers on shared or insecure cloud environments; deploy in trusted locations.
 
 ---
@@ -261,8 +321,11 @@ Protocols used for data security:
 # Conclusion
 
 - **WebRTC’s Impact**: Revolutionized real-time communication with Peer-to-Peer architecture, reducing reliance on centralized servers.
+
 - **Security Challenges**: Includes signaling vulnerabilities, IP address leaks, and the need for trust establishment.
+
 - **Existing Solutions**: DTLS-SRTP and Identity Providers offer strong encryption and authentication, but vulnerabilities remain.
+
 - **Future Directions**: Continued advancements in protocol design and heightened awareness of risks are needed to secure WebRTC for the modern web.
 
 ---
@@ -299,10 +362,53 @@ WebRTC has no direct standard for the signaling protocol, however some popular o
 
 ## Slack's vulnerable Turn Servers
 
-- Executive Summary
-  - Vulnerability Identified: Slack’s TURN server allowed relaying of TCP connections and UDP packets to internal Slack network and AWS meta-data services.
-  - Bug Bounty: $3,500 awarded for the discovery via HackerOne.
+**Executive Summary:**
+- Vulnerability Identified: Slack's TURN server allowed relaying of TCP connections and UDP packets to internal Slack network and AWS meta-data services.
+- Bug Bounty: $3,500 awarded for the discovery via HackerOne.
+
 - Abuse of TURN: Slack's TURN server was used to relay traffic to:
   - AWS Meta-Data Services: Access IAM temporary credentials.
-  - Internal Open Ports: Ports like 22, 25, 443, etc. on Slack’s internal servers.
+  - Internal Open Ports: Ports like 22, 25, 443, etc. on Slack's internal servers.
   - Port Scanning: Scan internal IP range (10.41.0.0/16) for management applications.
+
+---
+
+## NAT (Network Address Translation)
+- **Definition:** NAT is a networking process that modifies the source or destination IP address of packets as they pass through a router or firewall.
+
+- **Purpose:** Enables multiple devices on a local network (private IPs) to share a single public IP address when accessing external networks like the Internet.
+
+**How NAT Works:**
+- Devices in a local network are assigned private IP addresses (e.g., 192.168.x.x).
+
+-  The NAT router translates the private IP into the network's public IP when sending traffic to the Internet.
+- NAT uses port numbers to keep track of which internal device corresponds to each connection.
+
+---
+
+**Types of NAT:**
+- **Static NAT:** One-to-one mapping between private and public IP addresses.
+- **Dynamic NAT:** Maps private IPs to a pool of public IPs on a first-come, first-served basis.
+
+- **PAT (Port Address Translation):** Multiple private IPs share a single public IP, with traffic differentiated by port numbers.
+
+**Challenges of NAT:**
+- **Breaks Peer-to-Peer (P2P) Communication:** NAT makes direct communication between devices behind different NATs difficult.
+
+- Workarounds: Protocols like STUN, TURN, and ICE are used to traverse NAT in applications like WebRTC.
+
+---
+
+## DTLS Handshake Process
+
+- ClientHello: Initiates communication and proposes cryptographic algorithms.
+
+- ServerHello: Server responds with selected algorithms and its certificate.
+- Key Exchange: Both parties securely exchange keys using asymmetric encryption.
+- Session Keys: Generate shared session keys for encrypting communication.
+
+---
+
+## Differences Between Peer-To-Peer and Server to Client
+
+![left](./assets/Server-Client.drawio.svg)
