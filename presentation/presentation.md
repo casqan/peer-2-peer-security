@@ -251,6 +251,16 @@ Hochschule RheinMain
 
 # Potential Risks of WebRTC
 
+- WebRTC Leaks
+
+- Man-In-The-Middle
+
+- Exploitation of Vulnerable TURN Servers
+
+---
+
+# WebRTC Leaks
+
 - **IP Address Leakage**: WebRTC requires knowledge of a peer’s IP address, potentially exposing the user's location.
 - **Risk of Location Exposure**: Even when using VPNs, WebRTC can leak:
   - Public IPv6 addresses
