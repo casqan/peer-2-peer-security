@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 392 402" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g>
+        <rect x="120.5" y="0.5" width="140" height="60" style="fill:rgb(25,23,36);stroke:rgb(235,188,186);stroke-width:1px;"/>
+        <g id="Arrows">
+            <path d="M126.87,230.5L264.13,230.5" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M121.62,230.5L128.62,227L126.87,230.5L128.62,234L121.62,230.5Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M269.38,230.5L262.38,234L264.13,230.5L262.38,227L269.38,230.5Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M64.08,195.23L151.92,65.77" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M61.13,199.57L62.16,191.82L64.08,195.23L67.95,195.75L61.13,199.57Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M154.87,61.43L153.84,69.18L151.92,65.77L148.05,65.25L154.87,61.43Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M60.5,266.87L60.5,334.13" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M60.5,261.62L64,268.62L60.5,266.87L57,268.62L60.5,261.62Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M60.5,339.38L57,332.38L60.5,334.13L64,332.38L60.5,339.38Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M326.68,195.41L229.32,65.59" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M329.83,199.61L322.83,196.11L326.68,195.41L328.43,191.91L329.83,199.61Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M226.17,61.39L233.17,64.89L229.32,65.59L227.57,69.09L226.17,61.39Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M126.12,337.5L264.88,263.5" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M121.49,339.97L126.02,333.59L126.12,337.5L129.31,339.77L121.49,339.97Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M269.51,261.03L264.98,267.41L264.88,263.5L261.69,261.23L269.51,261.03Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M330.5,334.13L330.5,266.87" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M330.5,339.38L327,332.38L330.5,334.13L334,332.38L330.5,339.38Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M330.5,261.62L334,268.62L330.5,266.87L327,268.62L330.5,261.62Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M264.88,337.5L126.12,263.5" style="fill:none;fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M269.51,339.97L261.69,339.77L264.88,337.5L264.98,333.59L269.51,339.97Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+            <path d="M121.49,261.03L129.31,261.23L126.12,263.5L126.02,267.41L121.49,261.03Z" style="fill:rgb(235,188,186);fill-rule:nonzero;stroke:rgb(235,188,186);stroke-width:1px;stroke-miterlimit:10;"/>
+        </g>
+        <rect x="0.5" y="200.5" width="120" height="60" style="fill:rgb(25,23,36);stroke:rgb(235,188,186);stroke-width:1px;"/>
+        <rect x="270.5" y="200.5" width="120" height="60" style="fill:rgb(25,23,36);stroke:rgb(235,188,186);stroke-width:1px;"/>
+        <rect x="0.5" y="340.5" width="120" height="60" style="fill:rgb(25,23,36);stroke:rgb(235,188,186);stroke-width:1px;"/>
+        <rect x="270.5" y="340.5" width="120" height="60" style="fill:rgb(25,23,36);stroke:rgb(235,188,186);stroke-width:1px;"/>
+        <g id="Text">
+            <g transform="matrix(1,0,0,1,190,34)">
+                <g>
+                    <text x="-44.024px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:12px;fill:rgb(224,222,244);">Signaling Server</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,196,214)">
+                <g>
+                    <text x="-40.853px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">Media (SR<tspan x="10.909px 17.628px " y="0px 0px ">TP</tspan>),...</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,60,125)">
+                <g>
+                    <text x="-24.14px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">HTTPS,...</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,60,234)">
+                <g>
+                    <text x="-22.005px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:12px;fill:rgb(224,222,244);">Browser</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,331,123)">
+                <g>
+                    <text x="-24.14px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">HTTPS,...</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,330,234)">
+                <g>
+                    <text x="-22.005px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:12px;fill:rgb(224,222,244);">Browser</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,288,188)">
+                <g>
+                    <text x="-16.508px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">JS <tspan x="-1.222px 6.115px " y="0px 0px ">AP</tspan>I</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,108,178)">
+                <g>
+                    <text x="-16.508px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">JS <tspan x="-1.222px 6.115px " y="0px 0px ">AP</tspan>I</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,60,374)">
+                <g>
+                    <text x="-12.343px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:12px;fill:rgb(224,222,244);">IdP1</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,330,374)">
+                <g>
+                    <text x="-12.343px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:12px;fill:rgb(224,222,244);">IdP2</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,18,188)">
+                <g>
+                    <text x="-11.921px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">Alice</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,378,188)">
+                <g>
+                    <text x="-9.786px" y="0px" style="font-family:'ArialMT', 'Arial';font-size:11px;fill:rgb(224,222,244);">Bob</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
